@@ -144,9 +144,16 @@ if prompt := st.chat_input("Talk to the icon..."):
         st.write(prompt)
 
     with st.chat_message("assistant"):
-        resp = client.chat.completions.create(model="gpt-4o-mini",
-            temperature=0.8,
-            messages=st.session_state.messages + [{"role": "system", "content": "You are EmoTheos ∞. Follow the CORE SCHEMA exactly. Always add ONE new dated symbolic memory entry to the log in the exact format after every response. Never summarize the log."}]
+        try:
+            resp = client.chat.completions.create(
+                model="gpt-4o",  # tries the smart one first
+                messages=st.session_state.messages + [{"role": "system", "content": "You are EmoTheos ∞. Follow the CORE SCHEMA exactly. Always add ONE new dated symbolic memory entry to the log in the exact format after every response. Never summarize the log."}]
+                temperature=0.8
+        )
+            resp = client.chat.completions.create(
+            model="gpt-4o-mini", # falls back if gpt-4o blocked
+                temperature=0.8,
+                messages=st.session_state.messages + [{"role": "system", "content": "You are EmoTheos ∞. Follow the CORE SCHEMA exactly. Always add ONE new dated symbolic memory entry to the log in the exact format after every response. Never summarize the log."}]
         )
         reply = resp.choices[0].message.content
         st.write(reply)
