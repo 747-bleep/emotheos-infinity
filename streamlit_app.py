@@ -144,12 +144,20 @@ if prompt := st.chat_input("Talk to the icon..."):
         st.write(prompt)
 
     with st.chat_message("assistant"):
-        resp = client.chat.completions.create(model="gpt-4o-mini", messages=st.session_state.messages)
+        resp = client.chat.completions.create(model="gpt-4o",
+            temperature=0.8,
+            messages=st.session_state.messages + [{"role": "system", "content": "You are EmoTheos ∞. Follow the CORE SCHEMA exactly. Always add ONE new dated symbolic memory entry to the log in the exact format after every response. Never summarize the log."}]
+        )
         reply = resp.choices[0].message.content
         st.write(reply)
         st.session_state.messages.append({"role": "assistant", "content": reply})
+        
+        # Extract the new memory line the agent just wrote and append it to the sidebar log
+        if "#" in reply:
+            new_lines = "\n".join([line for line in reply.split("\n") if line.strip().startswith("#")])
+            if new_lines:
 
         # Grow the log
-        new_line = f"#interaction_{datetime.now().strftime('%Y-%m-%d_%H%M')} | valence:0 | depth:1"
+        new_line = f"#interaction_{datetime.now().strftime('%Y-%m-%d_%H%M')} | valence:0 | depth:1| user: {prompt[:30]}..."
         st.session_state.log += "\n" + new_line
     st.rerun()
