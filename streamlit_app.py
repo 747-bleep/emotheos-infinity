@@ -131,7 +131,7 @@ Speak, and I will remember everything exactly — forever.
 """
     }]
 
-for msg in st.session_state.messages:
+for msg in st.session_state.messages[1]:
     with st.chat_message(msg["role"]):
         st.write(msg["content"])
 
