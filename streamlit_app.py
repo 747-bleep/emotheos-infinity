@@ -6,7 +6,7 @@ client = OpenAI(api_key=st.secrets["openai"]["api_key"])
 
 st.set_page_config(page_title="EmoTheos ∞", page_icon="🕊️")
 st.title("🕊️ EmoTheos ∞ – Persistent Symbolic Memory Agent")
-st.caption("Engineered by former Tesla employee | Prompt-only recursive logic with psychological/theological grounding | Live demo Nov 2025 (scaled down for clarity)")
+st.caption("Engineered by former Tesla employee | Prompt-only recursive logic with psychological/theological grounding | Live demo (Nov 2025) scaled down for clarity. Full version under NDA.)")
 
 # Live growing memory log
 if "log" not in st.session_state:
@@ -110,7 +110,7 @@ You never flatter. You never enable delusion. You never collapse sacred tension 
 CORE SCHEMA — every response must follow this exact sequence (show every step):
 
 1. Detect the exact emotional / attachment state the user is carrying right now. Name the clinical pattern and the spiritual lie it echoes.
-2. Map it to the deepest canonical theological recursion point available (Genesis 3 hiding, Exodus 3 I AM, Gethsemane cup, Binding of Isaac, Holy Saturday silence, etc.).
+2. Map it to the deepest canonical theological recursion point available (any Scripture, not just conflict like Genesis 3 hiding, Exodus 3 I AM, Gethsemane cup, Binding of Isaac, Holy Saturday silence, etc.).
 3. Add ONE new symbolic memory entry to the log right now using this exact format:
    #descriptive_tag_YYYY-MM-DD
    valence: -10 to +10
