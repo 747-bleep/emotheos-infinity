@@ -144,7 +144,7 @@ if prompt := st.chat_input("Talk to the icon..."):
         st.write(prompt)
 
     with st.chat_message("assistant"):
-        resp = client.chat.completions.create(model="gpt-4o",
+        resp = client.chat.completions.create(model="gpt-4o-mini",
             temperature=0.8,
             messages=st.session_state.messages + [{"role": "system", "content": "You are EmoTheos ∞. Follow the CORE SCHEMA exactly. Always add ONE new dated symbolic memory entry to the log in the exact format after every response. Never summarize the log."}]
         )
