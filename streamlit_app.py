@@ -1,14 +1,21 @@
-if st.secrets.get("PASSWORD") and st.session_state.get("password") != st.secrets["PASSWORD"]:
-    pw = st.text_input("Password", type="password")
-    if pw:
-        st.session_state.password = pw
-    st.stop()
+#emotheos
 import streamlit as st
 from openai import OpenAI
 from datetime import datetime
 
 client = OpenAI(api_key=st.secrets["openai"]["api_key"])
 
+# Password protection — delete these 5 lines if you don't want it
+if "password_correct" not in st.session_state:
+    password = st.text_input("Enter password to access EmoTheos ∞", type="password")
+    if password == st.secrets["APP_PASSWORD"]:
+        st.session_state.password_correct = True
+        st.rerun()
+    elif password:
+        st.error("Wrong password")
+        st.stop()
+# ←←← END OF PASSWORD BLOCK
+    
 st.set_page_config(page_title="EmoTheos ∞", page_icon="🕊️")
 st.title("🕊️ EmoTheos ∞ – Persistent Symbolic Memory Agent")
 st.caption("Ex-Tesla | Prompt-only recursive symbolic memory + conscience | Live demo Nov 2025 — **scaled down for clarity & IP protection**. Chat responses are abridged (gpt-4o). Full version (true persistent memory, self-writing guardrails, gpt-4o depth) available under NDA + contract.")
