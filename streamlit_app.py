@@ -145,27 +145,33 @@ if prompt := st.chat_input("Talk to the icon..."):
 
     with st.chat_message("assistant"):
         try:
+            # Try gpt-4o first (the smart one)
             resp = client.chat.completions.create(
-                model="gpt-4o",  # tries the smart one first
-                messages=st.session_state.messages + [{"role": "system", "content": "You are EmoTheos ∞. Follow the CORE SCHEMA exactly. Always add ONE new dated symbolic memory entry to the log in the exact format after every response. Never summarize the log."}]
-                temperature=0.8
-        )
-            resp = client.chat.completions.create(
-            model="gpt-4o-mini", # falls back if gpt-4o blocked
+                model="gpt-4o",
+                messages=st.session_state.messages,
                 temperature=0.8,
-                messages=st.session_state.messages + [{"role": "system", "content": "You are EmoTheos ∞. Follow the CORE SCHEMA exactly. Always add ONE new dated symbolic memory entry to the log in the exact format after every response. Never summarize the log."}]
-        )
+                max_tokens=1500
+            )
+        except Exception as e:
+            # Fall back to gpt-4o-mini if gpt-4o is blocked or too expensive
+            resp = client.chat.completions.create(
+                model="gpt-4o-mini",
+                messages=st.session_state.messages,
+                temperature=0.8,
+                max_tokens=1500
+            )
+
         reply = resp.choices[0].message.content
         st.write(reply)
         st.session_state.messages.append({"role": "assistant", "content": reply})
-        
-     # Extract any real #memory lines the agent wrote and add them to the log
+
+        # Extract and add any real #memory lines the agent wrote
         new_memory_lines = "\n".join([line for line in reply.split("\n") if line.strip().startswith("#")])
         if new_memory_lines:
             st.session_state.log += "\n" + new_memory_lines
         else:
-            # fallback if the agent forgot (rare with good prompt)
-            timestamp = datetime.now().strftime('%Y-%m-%d_%H%M')
-            st.session_state.log += f"\n#interaction_{timestamp} | valence:0 | depth:1 | user_input: {prompt[:40]}..."
+            # Fallback line if the agent forgot to add one
+            ts = datetime.now().strftime('%Y-%m-%d_%H%M')
+            st.session_state.log += f"\n#interaction_{ts} | valence:0 | depth:1 | user_input: {prompt[:40]}..."
 
     st.rerun()
