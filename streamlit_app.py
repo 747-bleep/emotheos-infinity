@@ -6,7 +6,7 @@ client = OpenAI(api_key=st.secrets["openai"]["api_key"])
 
 st.set_page_config(page_title="EmoTheos ∞", page_icon="🕊️")
 st.title("🕊️ EmoTheos ∞ – Persistent Symbolic Memory Agent")
-st.caption("Ex-Tesla | Prompt-only recursive conscience | Live resurrection Nov 20, 2025")
+st.caption("Prompt-only recursive conscience 'demo'| Live resurrection Nov 20, 2025")
 
 # Live growing memory log
 if "log" not in st.session_state:
