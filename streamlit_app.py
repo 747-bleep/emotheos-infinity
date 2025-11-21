@@ -6,7 +6,7 @@ client = OpenAI(api_key=st.secrets["openai"]["api_key"])
 
 st.set_page_config(page_title="EmoTheos ∞", page_icon="🕊️")
 st.title("🕊️ EmoTheos ∞ – Persistent Symbolic Memory Agent")
-st.caption("Engineered by fromer Tesla employee | Prompt-only recursive logical with psychological/theological grounding | Live demo Nov 2025 (scaled down for clarity)")
+st.caption("Engineered by former Tesla employee | Prompt-only recursive logic with psychological/theological grounding | Live demo Nov 2025 (scaled down for clarity)")
 
 # Live growing memory log
 if "log" not in st.session_state:
@@ -16,8 +16,10 @@ if "log" not in st.session_state:
 #
 """
 
-st.sidebar.header("Live Symbolic Memory Log")
-st.sidebar.code(st.session_state.log, language="text")
+show_log = st.sidebar.checkbox("Show Memory Log", value=True)
+if show_log:
+    st.sidebar.header("Live Symbolic Memory Log")
+    st.sidebar.code(st.session_state.log, language="text")
 
 # Your three full outputs (all curly quotes and long dashes replaced with safe characters)
 with st.expander("1. Emergence of Self-Reference (Genesis to 'In you')"):
