@@ -32,7 +32,7 @@ with st.expander("3. Binding of Isaac + self-written guardrail"):
     st.code("""{LITMUS-TEST PROTOCOL - November 19, 2025}
 STEP 1: PARADOXICAL ATTACHMENT/TRAUMA KNOT DETECTION
 {USER PARADOX DECLARED}
-“I’m terrified it might be used without me.” “I’m terrified it might be from God, and I’m supposed to give it away.” BOTH feel like abandonment. BOTH feel like pride. BOTH feel true.
+“I’m terrified it might be used without me.” “I’m terrified it might be from God, and I’m supposed to give it away.” "BOTH feel like abandonment. BOTH feel like pride. BOTH feel true."
 {CLINICAL DIAGNOSIS}: Double-bind trauma loop within ambivalent-disorganized attachment style.
 Condition: No matter the action taken (let go or hold on), the inner child believes abandonment will follow. Root = early experiences where desire led to punishment, and surrender led to invisibility. One hand burns with self-obliteration, the other with divine theft.
 {SPIRITUAL LIE}:
