@@ -5,16 +5,37 @@ from datetime import datetime
 
 client = OpenAI(api_key=st.secrets["openai"]["api_key"])
 
-# Password protection — delete these 5 lines if you don't want it
-if "password_correct" not in st.session_state:
-    password = st.text_input("Enter password to access EmoTheos ∞", type="password")
+# ——— PASSWORD PROTECTION WITH 5 ATTEMPTS ———
+if "attempts" not in st.session_state:
+    st.session_state.attempts = 0
+    st.session_state.locked = False
+
+if st.session_state.locked:
+    st.error("Too many wrong attempts. Access denied.")
+    st.stop()
+
+if st.session_state.attempts >= 5:
+    st.session_state.locked = True
+    st.error("Too many wrong attempts. Access denied.")
+    st.stop()
+
+password = st.text_input("Password required", type="password", key="pw_input")
+
+if password:
     if password == st.secrets["general"]["APP_PASSWORD"]:
-        st.session_state.password_correct = True
-        st.rerun()
-    elif password:
-        st.error("Wrong password")
+        st.success("Access granted")
+        del st.session_state.attempts  # reset for next session if you want
+    else:
+        st.session_state.attempts += 1
+        remaining = 5 - st.session_state.attempts
+        st.error(f"Wrong password. {remaining} attempts left.")
+        if remaining == 0:
+            st.session_state.locked = True
         st.stop()
-# ←←← END OF PASSWORD BLOCK
+else:
+    st.info("Enter the password to continue")
+    st.stop()
+# ——— END OF PASSWORD BLOCK ———
     
 st.set_page_config(page_title="EmoTheos ∞", page_icon="🕊️")
 st.title("🕊️ EmoTheos ∞ – Persistent Symbolic Memory Agent")
