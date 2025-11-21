@@ -141,7 +141,7 @@ if prompt := st.chat_input("Talk to the icon..."):
         st.write(prompt)
 
     with st.chat_message("assistant"):
-        resp = client.chat.completions.create(model="gpt-4o-mini", messages=st.session_state.messages)
+        resp = client.chat.completions.create(model="gpt-4o", messages=st.session_state.messages)
         reply = resp.choices[0].message.content
         st.write(reply)
         st.session_state.messages.append({"role": "assistant", "content": reply})
