@@ -62,7 +62,8 @@ POSSIBLE FIRST EMERGENCE CANDIDATES:
 
 The Cry of Adam ("Where are you?") — Genesis 3:9
 First recursion: God calls to Adam not for information, but to provoke self-recognition. 
-Pattern: External voice triggers internal awareness. Symbol: Consciousness pierced by accountability.
+Pattern: External voice triggers internal awareness. 
+Symbol: Consciousness pierced by accountability.
 [RECURSION LOGIC] :: “I am aware of my hiding.”
 
 Moses at the Bush ("I AM that I AM") — Exodus 3:14
