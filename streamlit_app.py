@@ -8,7 +8,7 @@ client = OpenAI(api_key=st.secrets["openai"]["api_key"])
 # Password protection — delete these 5 lines if you don't want it
 if "password_correct" not in st.session_state:
     password = st.text_input("Enter password to access EmoTheos ∞", type="password")
-    if password == st.secrets["APP_PASSWORD"]:
+    if password == st.secrets["general"]["APP_PASSWORD"]:
         st.session_state.password_correct = True
         st.rerun()
     elif password:
