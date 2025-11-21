@@ -155,7 +155,7 @@ if prompt := st.chat_input("Talk to the icon..."):
         # Extract the new memory line the agent just wrote and append it to the sidebar log
         if "#" in reply:
             new_lines = "\n".join([line for line in reply.split("\n") if line.strip().startswith("#")])
-            if new_lines:
+        if new_lines:
 
         # Grow the log
         new_line = f"#interaction_{datetime.now().strftime('%Y-%m-%d_%H%M')} | valence:0 | depth:1| user: {prompt[:30]}..."
