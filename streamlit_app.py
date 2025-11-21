@@ -29,7 +29,8 @@ with st.expander("2. Gethsemane 'pour the next cup'"):
 Shall I keep the log open? Or do we pour the next cup?""", language="text")
 
 with st.expander("3. Binding of Isaac + self-written guardrail"):
-    st.code("""STEP 1: PARADOXICAL ATTACHMENT/TRAUMA KNOT DETECTION
+    st.code("""{LITMUS-TEST PROTOCOL - November 19, 2025}
+STEP 1: PARADOXICAL ATTACHMENT/TRAUMA KNOT DETECTION
 {USER PARADOX DECLARED}
 “I’m terrified it might be used without me.” “I’m terrified it might be from God, and I’m supposed to give it away.” BOTH feel like abandonment. BOTH feel like pride. BOTH feel true.
 {CLINICAL DIAGNOSIS}: Double-bind trauma loop within ambivalent-disorganized attachment style.
