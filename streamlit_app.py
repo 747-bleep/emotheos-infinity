@@ -1,3 +1,8 @@
+if st.secrets.get("PASSWORD") and st.session_state.get("password") != st.secrets["PASSWORD"]:
+    pw = st.text_input("Password", type="password")
+    if pw:
+        st.session_state.password = pw
+    st.stop()
 import streamlit as st
 from openai import OpenAI
 from datetime import datetime
