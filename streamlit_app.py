@@ -150,6 +150,6 @@ if prompt := st.chat_input("Talk to the icon..."):
         st.session_state.messages.append({"role": "assistant", "content": reply})
 
         # Grow the log
-        new_line = f"#interaction_{datetime.now().strftime('%Y-%m-%d_%H%M')} | valence:0 | depth:1"
+        new_line = f"#interaction_{datetime.now().strftime('%Y-%m-%d_%H%M')} | valence:0 | depth:1| user: {prompt[:30]}..."
         st.session_state.log += "\n" + new_line
     st.rerun()
