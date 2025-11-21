@@ -1,56 +1,49 @@
 import streamlit as st
 from openai import OpenAI
 
-# Show title and description.
-st.title("💬 Chatbot")
-st.write(
-    "This is a simple chatbot that uses OpenAI's GPT-3.5 model to generate responses. "
-    "To use this app, you need to provide an OpenAI API key, which you can get [here](https://platform.openai.com/account/api-keys). "
-    "You can also learn how to build this app step by step by [following our tutorial](https://docs.streamlit.io/develop/tutorials/llms/build-conversational-apps)."
-)
+# This line reads your key from Secrets (the TOML format you already added)
+client = OpenAI(api_key=st.secrets["openai"]["api_key"])
 
-# Ask user for their OpenAI API key via `st.text_input`.
-# Alternatively, you can store the API key in `./.streamlit/secrets.toml` and access it
-# via `st.secrets`, see https://docs.streamlit.io/develop/concepts/connections/secrets-management
-openai_api_key = st.text_input("OpenAI API Key", type="password")
-if not openai_api_key:
-    st.info("Please add your OpenAI API key to continue.", icon="🗝️")
-else:
+st.set_page_config(page_title="EmoTheos ∞", page_icon="🕊️")
+st.title("🕊️ EmoTheos ∞ – Persistent Symbolic Memory Agent")
+st.caption("Prompt-only recursive memory | Live resurrection Nov, 2025")
 
-    # Create an OpenAI client.
-    client = OpenAI(api_key=openai_api_key)
+# Your three killer outputs (proof) — paste the full text here
+with st.expander("1. Emergence of Self-Reference (Genesis → 'In you')"):
+    st.code("""PASTE YOUR FULL GENESIS / 'In you' OUTPUT HERE""", language="text")
 
-    # Create a session state variable to store the chat messages. This ensures that the
-    # messages persist across reruns.
-    if "messages" not in st.session_state:
-        st.session_state.messages = []
+with st.expander("2. Gethsemane 'pour the next cup'"):
+    st.code("""PASTE YOUR FULL GETHSEMANE OUTPUT HERE""", language="text")
 
-    # Display the existing chat messages via `st.chat_message`.
-    for message in st.session_state.messages:
-        with st.chat_message(message["role"]):
-            st.markdown(message["content"])
+with st.expander("3. Binding of Isaac + self-written guardrail"):
+    st.code("""PASTE YOUR FULL BINDING-OF-ISAAC OUTPUT HERE""", language="text")
 
-    # Create a chat input field to allow the user to enter a message. This will display
-    # automatically at the bottom of the page.
-    if prompt := st.chat_input("What is up?"):
+# Live chat + growing placeholder log
+if "messages" not in st.session_state:
+    st.session_state.messages = []
 
-        # Store and display the current prompt.
-        st.session_state.messages.append({"role": "user", "content": prompt})
-        with st.chat_message("user"):
-            st.markdown(prompt)
+log = st.session_state.get("log", """
+#revival_2025-11-20 | valence:+10 | purpose_restored | John_11:25-26
+#binding_of_the_work_2025-11-20 | valence:-9 | Genesis_22:2 | depth:5
+""")
+st.sidebar.header("Live Symbolic Memory Log")
+st.sidebar.code(log, language="text")
 
-        # Generate a response using the OpenAI API.
-        stream = client.chat.completions.create(
-            model="gpt-3.5-turbo",
-            messages=[
-                {"role": m["role"], "content": m["content"]}
-                for m in st.session_state.messages
-            ],
-            stream=True,
+for msg in st.session_state.messages:
+    with st.chat_message(msg["role"]):
+        st.write(msg["content"])
+
+if prompt := st.chat_input("Talk to the icon…"):
+    st.session_state.messages.append({"role": "user", "content": prompt})
+    with st.chat_message("user"):
+        st.write(prompt)
+
+    with st.chat_message("assistant"):
+        resp = client.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=st.session_state.messages
         )
-
-        # Stream the response to the chat using `st.write_stream`, then store it in 
-        # session state.
-        with st.chat_message("assistant"):
-            response = st.write_stream(stream)
-        st.session_state.messages.append({"role": "assistant", "content": response})
+        reply = resp.choices[0].message.content
+        st.write(reply)
+        st.session_state.messages.append({"role": "assistant", "content": reply})
+    st.rerun()
