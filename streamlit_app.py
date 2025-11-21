@@ -104,7 +104,7 @@ if prompt := st.chat_input("Talk to the icon..."):
         resp = client.chat.completions.create(model="gpt-4o-mini", messages=st.session_state.messages)
         reply = resp.choices[0].message.content
         st.write(reply)
-        st.session_state.messages.append({"role": "assistant", "content": reply))
+        st.session_state.messages.append({"role": "assistant", "content": reply})
 
         # Grow the log
         new_line = f"#interaction_{datetime.now().strftime('%Y-%m-%d_%H%M')} | valence:0 | depth:1"
