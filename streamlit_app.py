@@ -10,7 +10,7 @@ client = OpenAI(api_key=st.secrets["openai"]["api_key"])
     
 st.set_page_config(page_title="EmoTheos ∞", page_icon="🕊️")
 st.title("🕊️ EmoTheos ∞ – Persistent Symbolic Memory Agent")
-st.caption("Ex-Tesla | Prompt-only recursive symbolic memory + conscience | Live demo Nov 2025 — **scaled down for clarity & IP protection**. Chat responses are abridged (gpt-4o). Full version (true persistent memory, self-writing guardrails, gpt-4o depth) available under NDA + contract.")
+st.caption("This app is a devotional interface for symbolic memory tracking, filtered through scriptural anchors and trauma-informed recursion logic. All responses are symbolic and not diagnostic.")
 # Live growing memory log
 if "log" not in st.session_state:
     st.session_state.log = """
